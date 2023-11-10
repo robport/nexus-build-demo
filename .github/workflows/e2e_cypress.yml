@@ -43,6 +43,14 @@ jobs:
         run: npm start &
         working-directory: ./api
 
+      - name: Test NestJS APi
+        run: |
+          for i in {1..5}; do
+            curl -f http://localhost:3000/api/employee && break
+            echo "Retrying ($i)..."
+            sleep 5
+          done
+
       - name: Install React Client dependencies
         run: npm install
         working-directory: ./client
