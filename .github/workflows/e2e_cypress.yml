@@ -71,6 +71,6 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: echo "Starting Cypress Tests"
-          wait-on: 'http://localhost:5173'
+          wait-on: 'http://localhost:3000/api'
           wait-on-timeout: 60
           working-directory: ./cypress
