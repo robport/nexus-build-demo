@@ -1,6 +1,7 @@
 name: E2E Tests
 
-on: [push, pull_request]
+#on: [push, pull_request]
+on: [push]
 
 jobs:
   build-and-test:
@@ -64,4 +65,3 @@ jobs:
           start: echo "Starting Cypress Tests"
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
-        working-directory: ./cypress
