@@ -65,3 +65,4 @@ jobs:
           start: echo "Starting Cypress Tests"
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
+          working-directory: ./cypress
