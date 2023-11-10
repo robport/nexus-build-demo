@@ -58,7 +58,7 @@ jobs:
         run: npm install
         working-directory: ./cypress
 
-      - name: Run Cypress Tests
+      - name: Run Cypress Tests Now
         uses: cypress-io/github-action@v2
         run: npm test
         with:
