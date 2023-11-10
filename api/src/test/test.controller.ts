@@ -17,6 +17,7 @@ export class TestController {
   async reset(
     @Body() resetDto: ResetDto
   ) {
+    console.log('hello')
     await this.employeeService.deleteAll();
     for (let i = 0; i < resetDto.numberOfEmployees; i++) {
       await this.employeeService.create({
