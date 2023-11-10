@@ -1,2 +1,67 @@
-  on:
-  jobs:
+name: E2E Tests
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: development
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install NestJS API dependencies
+        run: npm install
+        working-directory: ./api
+
+      - name: Build NestJS API
+        run: npm run build
+        working-directory: ./api
+
+      - name: Start NestJS API
+        run: npm start &
+        working-directory: ./api
+
+      - name: Install React Client dependencies
+        run: npm install
+        working-directory: ./client
+
+      - name: Build React Client
+        run: npm run build
+        working-directory: ./client
+
+      - name: Serve React Client
+        run: npx serve -s build -l 5173 &
+        working-directory: ./client
+
+      - name: Install Cypress dependencies
+        run: npm install
+        working-directory: ./cypress
+
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v2
+        run: npm test
+        with:
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 60
+        working-directory: ./cypress
