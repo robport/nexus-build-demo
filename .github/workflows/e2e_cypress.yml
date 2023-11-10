@@ -43,7 +43,7 @@ jobs:
         run: npm start &
         working-directory: ./api
 
-      - name: Test NestJS APi
+      - name: Test NestJS API
         run: |
           for i in {1..5}; do
             curl -f http://localhost:3000/api/employee && break
@@ -60,7 +60,7 @@ jobs:
         working-directory: ./client
 
       - name: Serve React Client
-        run: npx serve -s build -l 5173 &
+        run: npx run dev &
         working-directory: ./client
 
       - name: Install Cypress dependencies
