@@ -1,12 +1,12 @@
 describe('Employees', () => {
   it('create employee', () => {
-    // cy.request({
-    //   method: 'POST',
-    //   url: 'http://localhost:3000/api/test/reset',
-    //   body: {
-    //     numberOfEmployees: 3
-    //   }
-    // });
+    cy.request({
+      method: 'POST',
+      url: 'http://localhost:3000/api/test/reset',
+      body: {
+        numberOfEmployees: 3
+      }
+    });
 
     cy.intercept('GET', '/api/employee').as('get-employees');
     cy.visit('/');
