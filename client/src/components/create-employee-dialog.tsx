@@ -33,7 +33,9 @@ function CreateEmployeeDialog() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary"
+              data-e2e="open-create-employee-dialog"
+              onClick={handleShow}>
         Create Employee
       </Button>
 
@@ -49,6 +51,7 @@ function CreateEmployeeDialog() {
                 {...register('name', {
                   required: true
                 })}
+                data-e2e="create-employee-name"
                 placeholder="Name" />
             </Form.Group>
 
@@ -57,7 +60,10 @@ function CreateEmployeeDialog() {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button disabled={!isValid} variant="primary" type="submit">
+            <Button disabled={!isValid}
+                    data-e2e="save-employee-button"
+                    variant="primary"
+                    type="submit">
               Save
             </Button>
           </Modal.Footer>

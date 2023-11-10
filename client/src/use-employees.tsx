@@ -18,7 +18,6 @@ export const EmployeeProvider = ({ children }: Props) => {
 
   const fetchEmployees = useCallback(async () => {
     EmployeeService.findAll().then((employees) => {
-      console.log(employees);
       setEmployees(employees);
     });
   }, []);
