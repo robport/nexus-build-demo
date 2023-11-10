@@ -56,6 +56,18 @@
         "tags": [
           "employee"
         ]
+      },
+      "delete": {
+        "operationId": "deleteAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "employee"
+        ]
       }
     },
     "/api/employee/{id}": {

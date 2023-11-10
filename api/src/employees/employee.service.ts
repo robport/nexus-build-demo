@@ -29,4 +29,9 @@ export class EmployeeService {
       id: employeeId
     });
   }
+
+  async deleteAll(): Promise<void> {
+    await this.employeeRepository.delete({
+    });
+  }
 }

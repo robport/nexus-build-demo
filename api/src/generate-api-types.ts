@@ -23,7 +23,7 @@ const generateOpenApiTypes = async () => {
 
   const apiGenerationOptions = {
     input: './openapi.json',
-    output: '../nexus-react/src/open-api',
+    output: '../client/src/open-api',
     exportSchemas: false,
     exportServices: true,
     exportCore: true
