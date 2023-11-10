@@ -40,6 +40,17 @@ requestBody: CreateEmployeeDto,
     }
 
     /**
+     * @returns any 
+     * @throws ApiError
+     */
+    public static deleteAll(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/api/employee',
+        });
+    }
+
+    /**
      * @param id 
      * @param requestBody 
      * @returns any 

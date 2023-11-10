@@ -1,13 +1,12 @@
 import './App.css';
-import EmployeeList from './components/employee-list.tsx';
-import CreateEmployeeDialog from './components/create-employee-dialog.tsx';
 import { EmployeeProvider } from './use-employees.tsx';
+import Employees from './components/employees.tsx';
 
 function App() {
+
   return (<>
     <EmployeeProvider>
-      <EmployeeList />
-      <CreateEmployeeDialog />
+      <Employees />
     </EmployeeProvider>
   </>);
 }

@@ -5,6 +5,7 @@ interface EmployeeContextType {
   employees: EmployeeDto[];
   fetchEmployees: () => void;
   deleteEmployee: (id: number) => void;
+  deleteAllEmployees: () => void;
 }
 
 const EmployeeContext = createContext<EmployeeContextType | undefined>(undefined);
@@ -15,6 +16,12 @@ export interface Props {
 
 export const EmployeeProvider = ({ children }: Props) => {
   const [employees, setEmployees] = useState<EmployeeDto[]>([]);
+
+  const deleteAllEmployees = useCallback(async () => {
+    EmployeeService.deleteAll().then(() => {
+      fetchEmployees();
+    });
+  }, []);
 
   const fetchEmployees = useCallback(async () => {
     EmployeeService.findAll().then((employees) => {
@@ -29,7 +36,7 @@ export const EmployeeProvider = ({ children }: Props) => {
   }, []);
 
   return (
-    <EmployeeContext.Provider value={{ employees, fetchEmployees, deleteEmployee }}>
+    <EmployeeContext.Provider value={{ employees, fetchEmployees, deleteEmployee, deleteAllEmployees }}>
       {children}
     </EmployeeContext.Provider>
   );

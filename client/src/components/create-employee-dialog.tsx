@@ -36,7 +36,7 @@ function CreateEmployeeDialog() {
       <Button variant="primary"
               data-e2e="open-create-employee-dialog"
               onClick={handleShow}>
-        Create Employee
+        Create
       </Button>
 
       <Modal show={show} onHide={handleClose}>
