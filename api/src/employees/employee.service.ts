@@ -31,7 +31,6 @@ export class EmployeeService {
   }
 
   async deleteAll(): Promise<void> {
-    await this.employeeRepository.delete({
-    });
+    await this.employeeRepository.clear();
   }
 }

@@ -123,6 +123,30 @@
           "employee"
         ]
       }
+    },
+    "/api/test/reset": {
+      "post": {
+        "operationId": "reset",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "test"
+        ]
+      }
     }
   },
   "info": {
@@ -170,6 +194,17 @@
         },
         "required": [
           "name"
+        ]
+      },
+      "ResetDto": {
+        "type": "object",
+        "properties": {
+          "numberOfEmployees": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "numberOfEmployees"
         ]
       }
     }
