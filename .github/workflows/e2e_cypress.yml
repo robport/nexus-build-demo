@@ -68,7 +68,7 @@ jobs:
         working-directory: ./cypress
 
       - name: Run Cypress Tests Now
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v6
         with:
           start: echo "Starting Cypress Tests"
           wait-on: 'http://localhost:3000/api'
