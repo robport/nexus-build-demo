@@ -60,7 +60,7 @@ jobs:
         working-directory: ./client
 
       - name: Serve React Client
-        run: npx run dev &
+        run: npm run dev &
         working-directory: ./client
 
       - name: Install Cypress dependencies
