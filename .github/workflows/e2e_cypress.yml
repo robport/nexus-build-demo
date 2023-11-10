@@ -60,8 +60,8 @@ jobs:
 
       - name: Run Cypress Tests Now
         uses: cypress-io/github-action@v2
-        run: npm test
         with:
+          start: echo "Starting Cypress Tests"
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
         working-directory: ./cypress
