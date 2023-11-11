@@ -6,6 +6,7 @@ import { EmployeeService } from './employees/employee.service';
 import { EmployeeController } from './employees/employee.controller';
 import { Employee } from './employees/employee.entity';
 import { TestController } from './test/test.controller';
+import { RedisController } from './redis/redis.controller';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { TestController } from './test/test.controller';
     }),
     TypeOrmModule.forFeature([Employee])
   ],
-  controllers: [AppController, EmployeeController, TestController],
+  controllers: [AppController, EmployeeController, TestController, RedisController],
   providers: [AppService, EmployeeService]
 })
 export class AppModule {
