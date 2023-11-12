@@ -13,8 +13,9 @@ export class RedisController {
 
   private async connect() {
     if (!this.redisClient) {
+      const url =`redis://${process.env['REDIS_HOST']}:${Number.parseInt(process.env['REDIS_PORT'])}`
       this.redisClient = createClient({
-        url: process.env['REDIS_URL'],
+        url: url,
         password: process.env['REDIS_PASSWORD']
       });
       await this.redisClient.connect();
