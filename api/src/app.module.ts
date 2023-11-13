@@ -24,28 +24,28 @@ import { TestQueueConsumer } from './bull/job-processor';
       synchronize: true // set to false in production
     }),
     TypeOrmModule.forFeature([Employee]),
-    BullModule.forRoot({
-      redis: {
-        host: process.env['REDIS_HOST'],
-        port: Number.parseInt(process.env['REDIS_PORT']),
-        password: process.env['REDIS_PASSWORD']
-      }
-    }),
-    BullModule.registerQueue({
-      name: 'test-queue'
-    })
+    // BullModule.forRoot({
+    //   redis: {
+    //     host: process.env['REDIS_HOST'],
+    //     port: Number.parseInt(process.env['REDIS_PORT']),
+    //     password: process.env['REDIS_PASSWORD']
+    //   }
+    // }),
+    // BullModule.registerQueue({
+    //   name: 'test-queue'
+    // })
   ],
   controllers: [
     AppController,
     EmployeeController,
     TestController,
-    BullController,
+    // BullController,
     RedisController,
   ],
   providers: [
     AppService,
     EmployeeService,
-    TestQueueConsumer,
+    // TestQueueConsumer,
   ]
 })
 export class AppModule {
