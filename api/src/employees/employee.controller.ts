@@ -39,4 +39,10 @@ export class EmployeeController {
     return this.employeeService.delete(id);
   }
 
+  @Delete()
+  async deleteAll(
+  ): Promise<void> {
+    return this.employeeService.deleteAll();
+  }
+
 }

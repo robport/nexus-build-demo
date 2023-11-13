@@ -1,12 +1,21 @@
 name: E2E Tests
 
-on: [push, pull_request]
+on: [ pull_request ]
+
+env:
+  REDIS_HOST: 'localhost'
+  REDIS_PORT: '6379'
+  REDIS_PASSWORD: ''
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
       postgres:
         image: postgres:latest
         env:
@@ -23,10 +32,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
 
@@ -42,6 +51,14 @@ jobs:
         run: npm start &
         working-directory: ./api
 
+      - name: Test NestJS API
+        run: |
+          for i in {1..5}; do
+            curl -f http://localhost:3000/api && break
+            echo "Retrying ($i)..."
+            sleep 5
+          done
+
       - name: Install React Client dependencies
         run: npm install
         working-directory: ./client
@@ -51,17 +68,24 @@ jobs:
         working-directory: ./client
 
       - name: Serve React Client
-        run: npx serve -s build -l 5173 &
+        run: npm run dev &
         working-directory: ./client
 
       - name: Install Cypress dependencies
         run: npm install
         working-directory: ./cypress
 
-      - name: Run Cypress Tests
-        uses: cypress-io/github-action@v2
-        run: npm test
+      - name: Run Cypress Tests Now
+        uses: cypress-io/github-action@v6
         with:
-          wait-on: 'http://localhost:3000'
+          start: echo "Starting Cypress Tests"
+          wait-on: 'http://localhost:3000/api'
           wait-on-timeout: 60
-        working-directory: ./cypress
+          working-directory: ./cypress
+
+      - name: Upload Cypress Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots

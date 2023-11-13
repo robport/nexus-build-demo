@@ -5,6 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EmployeeService } from './employees/employee.service';
 import { EmployeeController } from './employees/employee.controller';
 import { Employee } from './employees/employee.entity';
+import { TestController } from './test/test.controller';
+import { RedisController } from './redis/redis.controller';
+import { BullModule } from '@nestjs/bull';
+import { BullController } from './bull/bull.controller';
+import { TestQueueConsumer } from './bull/job-processor';
 
 @Module({
   imports: [
@@ -18,10 +23,30 @@ import { Employee } from './employees/employee.entity';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true // set to false in production
     }),
-    TypeOrmModule.forFeature([Employee])
+    TypeOrmModule.forFeature([Employee]),
+    // BullModule.forRoot({
+    //   redis: {
+    //     host: process.env['REDIS_HOST'],
+    //     port: Number.parseInt(process.env['REDIS_PORT']),
+    //     password: process.env['REDIS_PASSWORD']
+    //   }
+    // }),
+    // BullModule.registerQueue({
+    //   name: 'test-queue'
+    // })
   ],
-  controllers: [AppController, EmployeeController],
-  providers: [AppService, EmployeeService]
+  controllers: [
+    AppController,
+    EmployeeController,
+    TestController,
+    // BullController,
+    RedisController,
+  ],
+  providers: [
+    AppService,
+    EmployeeService,
+    // TestQueueConsumer,
+  ]
 })
 export class AppModule {
 }

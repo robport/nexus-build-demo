@@ -9,7 +9,9 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { CreateEmployeeDto } from './models/CreateEmployeeDto';
 export type { EmployeeDto } from './models/EmployeeDto';
+export type { ResetDto } from './models/ResetDto';
 export type { UpdateEmployeeDto } from './models/UpdateEmployeeDto';
 
 export { DefaultService } from './services/DefaultService';
 export { EmployeeService } from './services/EmployeeService';
+export { TestService } from './services/TestService';
