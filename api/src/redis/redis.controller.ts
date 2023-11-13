@@ -35,7 +35,8 @@ export class RedisController {
     @Param('key') key: string
   ): Promise<string> {
     await this.connect();
-    return await this.redisClient.get(key);
+    const value = await this.redisClient.get(key);
+    return value ?? 'No value'
   }
 
   @Post()
